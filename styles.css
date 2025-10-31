@@ -1,0 +1,6 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: sans-serif; display: flex; min-height: 100vh; }
+.sidebar { width: 220px; background: #f4f4f4; padding: 20px; }
+.content { flex: 1; padding: 30px; }
+.sidebar ul { list-style: none; }
+.sidebar a { text-decoration: none; display: block; padding: 8px 0; color: #333; }

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard | Hiyar Hotel</title>
+  <style>
+    :root{
+      --sidebar-w:250px; --sidebar-c:#0f0f0f; --accent:#ffd700;
+    }
+    *{box-sizing:border-box;font-family:Inter, Poppins, sans-serif}
+    body{margin:0;background:#f4f4f4;display:flex;min-height:100vh}
+    /* Sidebar */
+    .sidebar{
+      width:var(--sidebar-w);background:linear-gradient(180deg,var(--sidebar-c),#2e2e2e);color:#fff;
+      padding:20px 12px;position:fixed;height:100vh;transition:width .3s;
+      box-shadow:4px 0 18px rgba(0,0,0,0.15);
+    }
+    .sidebar.closed{width:72px}
+    .logo{display:flex;align-items:center;gap:12px;padding:8px 12px}
+    .logo img{width:42px;height:42px;border-radius:8px;object-fit:cover}
+    .hotel-name{font-weight:700;color:var(--accent);font-size:18px}
+    .hotel-name.small{display:none}
+    .sidebar.closed .hotel-name{display:none}
+    .nav{margin-top:24px;display:flex;flex-direction:column;gap:6px}
+    .nav a{
+      color:#fff;text-decoration:none;padding:12px;border-radius:8px;margin:4px 6px;display:flex;align-items:center;gap:12px;font-weight:600;
+    }
+    .nav a:hover{background:var(--accent);color:#111}
+    .toggle{
+      position:absolute;left:calc(var(--sidebar-w) + 12px);top:18px;background:#fff;padding:8px;border-radius:8px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15);
+      transition:left .3s;
+    }
+    .sidebar.closed + .toggle{left:92px}
+    /* Main content */
+    .main{margin-left:var(--sidebar-w);padding:28px;flex:1;transition:margin-left .3s}
+    .sidebar.closed ~ .main{margin-left:72px}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .welcome{font-size:20px;font-weight:700}
+    .logout-btn{background:var(--accent);border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+    /* small screens */
+    @media (max-width:700px){
+      .sidebar{position:fixed;z-index:30;left:0;transform:translateX(-110%);transition:transform .25s}
+      .sidebar.open{transform:translateX(0)}
+      .toggle{left:12px;top:12px}
+      .main{margin-left:0}
+    }
+  </style>
+</head>
+<body>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="logo">
+      <img src="https://via.placeholder.com/80x80.png?text=H" alt="logo">
+      <div>
+        <div class="hotel-name">Hiyar Hotel</div>
+        <div class="hotel-name small" style="font-size:12px;color:#ddd">Welcome</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="#home">🏠 <span class="link-text">Home</span></a>
+      <a href="#book">🛎 <span class="link-text">Bookings</span></a>
+      <a href="#rooms">🛏 <span class="link-text">Rooms</span></a>
+      <a href="#gallery">🖼 <span class="link-text">Gallery</span></a>
+      <a href="#contact">📞 <span class="link-text">Contact</span></a>
+    </nav>
+
+    <div style="position:absolute;bottom:20px;left:12px">
+      <div style="font-size:13px;color:#ccc">Signed in as</div>
+      <div id="userLabel" style="font-weight:700;margin-top:6px"></div>
+    </div>
+  </aside>
+
+  <div id="toggleBtn" class="toggle">☰</div>
+
+  <main class="main">
+    <header>
+      <div class="welcome" id="welcomeMsg">Welcome</div>
+      <div>
+        <button id="logout" class="logout-btn">Logout</button>
+      </div>
+    </header>
+
+    <section id="content">
+      <h2>Dashboard</h2>
+      <p>This is your dashboard content. The sidebar above is only visible when you're logged in.</p>
+
+      <!-- Example: protected content toggling -->
+      <div style="margin-top:20px">
+        <button id="toggleSidebarCompact">Toggle Compact Sidebar</button>
+      </div>
+    </section>
+  </main>
+
+<script>
+  // Check authentication on page load
+  if (localStorage.getItem('isLoggedIn') !== 'true') {
+    // Not logged in -> send to login page
+    window.location.href = 'login.html';
+  }
+
+  const username = localStorage.getItem('username') || 'Guest';
+  document.getElementById('userLabel').textContent = username;
+  document.getElementById('welcomeMsg').textContent = 'Hello, ' + username + '!';
+
+  // Sidebar toggle behavior
+  const sidebar = document.getElementById('sidebar');
+  const toggleBtn = document.getElementById('toggleBtn');
+
+  toggleBtn.addEventListener('click', () => {
+    // For small screens we toggle "open" class, for larger screens toggle compact "closed"
+    if (window.innerWidth <= 700) {
+      sidebar.classList.toggle('open');
+    } else {
+      sidebar.classList.toggle('closed');
+    }
+  });
+
+  // Extra example control
+  document.getElementById('toggleSidebarCompact').addEventListener('click', () => {
+    sidebar.classList.toggle('closed');
+  });
+
+  // Logout
+  document.getElementById('logout').addEventListener('click', () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('username');
+    window.location.href = 'login.html';
+  });
+
+  // Optionally: auto-close sidebar on nav click for small screens
+  document.querySelectorAll('.nav a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      if (window.innerWidth <= 700) sidebar.classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>

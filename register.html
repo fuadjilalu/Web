@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Hiyar Hotel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #0f0f0f, #2c2c2c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .register-box {
+      width: 420px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      color: white;
+    }
+
+    .register-box h2 {
+      margin-bottom: 25px;
+      color: #ffd700;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    .input-box {
+      position: relative;
+      margin: 15px 0;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      outline: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+    }
+
+    .input-box input::placeholder {
+      color: #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #ffd700;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+     
+    }
+
+    button:hover {
+      background: black;
+      transform: scale(1.03);
+      
+    }
+
+    p {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Decorative glow */
+    .glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffd70040, transparent);
+      filter: blur(80px);
+      z-index: -1;
+    }
+
+    .glow1 {
+      top: -100px;
+      left: -100px;
+    }
+
+    .glow2 {
+      bottom: -100px;
+      right: -100px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="glow glow1"></div>
+  <div class="glow glow2"></div>
+
+  <div class="register-box">
+    <h2>Create Account</h2>
+    <form action="#">
+      <div class="input-box">
+        <input type="text" placeholder="Full Name" required>
+      </div>
+      <div class="input-box">
+        <input type="email" placeholder="Email Address" required>
+      </div>
+      <div class="input-box">
+        <input type="text" placeholder="Username" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Password" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Confirm Password" required>
+      </div>
+      <button type="submit"><form action="sidebar.html">register</button>
+      <p>Already have an account? <a href="login.html">Login</a></p>
+    </form>
+  </div>
+
+</body>
+</html>
